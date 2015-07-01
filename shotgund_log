@@ -1,0 +1,18 @@
+20071017 20:26:30.243 listening on *:1053
+20071017 20:26:30.247 shotgund 1.1.7 started
+20071017 20:26:34.498 [029007] New lookup from host 127.0.0.1 "SOA psi.net"
+20071017 20:26:34.498 [029007] Lookup matched ACL "host * * SOA permit" - permitted
+20071017 20:26:34.499 [029007] Group 'local-resolvers' start
+20071017 20:26:34.499 [029007.001] Request: SOA psi.net @204.91.156.197, 2500ms, weight 1
+20071017 20:26:34.500 [029007.002] Request: SOA psi.net @192.148.252.133, 2500ms, weight 1
+20071017 20:26:34.546 [029007.001] psi.net[SOA: auth1.dns.cogentco.com dns.cogentco.com 2007062601 3600 1800 1209600 10800] 45.86ms
+20071017 20:26:34.547 [029007.001] psi.net[SOA: auth1.dns.cogentco.com dns.cogentco.com 2007062601 3600 1800 1209600 10800] 45.86ms
+20071017 20:26:43.212 [032433] New lookup from host 127.0.0.1 "SOA psi.net"
+20071017 20:26:43.213 [032433] Lookup matched ACL "host * * SOA permit" - permitted
+20071017 20:26:43.213 [032433] Group 'local-resolvers' start
+20071017 20:26:43.213 [032433.001] Request: SOA psi.net @204.91.156.197, 2500ms, weight 1
+20071017 20:26:43.214 [032433.002] Request: SOA psi.net @192.148.252.133, 2500ms, weight 1
+20071017 20:26:43.259 [032433.001] psi.net[SOA: auth1.dns.cogentco.com dns.cogentco.com 2007062601 3600 1800 1209600 10800] 44.65ms
+20071017 20:26:43.259 [032433.001] psi.net[SOA: auth1.dns.cogentco.com dns.cogentco.com 2007062601 3600 1800 1209600 10800] 44.65ms
+20071017 20:26:45.350 Shutting down...
+20071017 20:26:45.351 shotgund 1.1.7 exited

@@ -1,0 +1,391 @@
+shotgund_resolver.o shotgund_resolver.o: shotgund_resolver.cc \
+  shotgund_resolver.h log.h shotgund_sys.h /usr/include/unistd.h \
+  /usr/include/sys/cdefs.h /usr/include/machine/cdefs.h \
+  /usr/include/sys/types.h /usr/include/sys/_types.h \
+  /usr/include/machine/_types.h /usr/include/machine/endian.h \
+  /usr/include/sys/endian.h /usr/include/sys/select.h \
+  /usr/include/sys/time.h /usr/include/time.h /usr/include/sys/unistd.h \
+  ../lib/config.h /usr/include/sys/param.h /usr/include/sys/simplelock.h \
+  /usr/include/sys/syslimits.h /usr/include/sys/signal.h \
+  /usr/include/machine/signal.h /usr/include/machine/trap.h \
+  /usr/include/sys/siginfo.h /usr/include/sys/limits.h \
+  /usr/include/machine/internal_types.h /usr/include/machine/limits.h \
+  /usr/include/machine/param.h /usr/include/sys/file.h \
+  /usr/include/sys/fcntl.h /usr/include/sys/mman.h \
+  /usr/include/sys/stat.h /usr/include/sys/wait.h \
+  /usr/include/sys/ioctl.h /usr/include/sys/ttycom.h \
+  /usr/include/sys/ioccom.h /usr/include/sys/dkio.h \
+  /usr/include/sys/filio.h /usr/include/sys/sockio.h \
+  /usr/include/sys/resource.h /usr/include/sys/uio.h \
+  /usr/include/sys/poll.h /usr/include/ctype.h /usr/include/sys/sysctl.h \
+  /usr/include/sys/ucred.h /usr/include/sys/proc.h \
+  /usr/include/machine/proc.h /usr/include/sys/selinfo.h \
+  /usr/include/sys/event.h /usr/include/sys/queue.h \
+  /usr/include/sys/timeout.h /usr/include/machine/atomic.h \
+  /usr/include/sys/resourcevar.h /usr/include/uvm/uvm_extern.h \
+  /usr/include/sys/vmmeter.h /usr/include/sys/tree.h \
+  /usr/include/uvm/uvm_param.h /usr/include/machine/vmparam.h \
+  /usr/include/sys/lock.h /usr/include/uvm/uvm_page.h \
+  /usr/include/uvm/uvm_pglist.h /usr/include/uvm/uvm_pmap.h \
+  /usr/include/machine/pmap.h /usr/include/machine/cpufunc.h \
+  /usr/include/machine/pte.h /usr/include/machine/segments.h \
+  /usr/include/uvm/uvm_object.h /usr/include/uvm/uvm_map.h \
+  /usr/include/uvm/uvm_anon.h /usr/include/uvm/uvm_fault.h \
+  /usr/include/uvm/uvm_pager.h /usr/include/sys/socket.h \
+  /usr/include/grp.h /usr/include/pwd.h /usr/include/syslog.h \
+  /usr/include/dirent.h /usr/include/sys/dirent.h /usr/include/pthread.h \
+  /usr/include/limits.h /usr/include/sched.h /usr/include/string.h \
+  /usr/include/stdio.h /usr/include/stdarg.h /usr/include/signal.h \
+  /usr/include/errno.h /usr/include/sys/errno.h /usr/include/stdlib.h \
+  /usr/include/fcntl.h /usr/include/fnmatch.h /usr/include/utime.h \
+  /usr/include/netdb.h /usr/include/arpa/inet.h \
+  /usr/include/netinet/in_systm.h /usr/include/netinet/in.h \
+  /usr/include/netinet6/in6.h /usr/include/netinet/ip.h \
+  /usr/include/netinet/ip_icmp.h /usr/include/net/ppp_defs.h \
+  /usr/include/net/if.h /usr/include/altq/if_altq.h \
+  /usr/include/net/if_arp.h /usr/include/net/if_ppp.h \
+  /usr/include/regex.h ../lib/dotconf++/dotconfpp.h /usr/include/g++/list \
+  /usr/include/g++/bits/functexcept.h \
+  /usr/include/g++/exception_defines.h \
+  /usr/include/g++/bits/stl_algobase.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/c++config.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/os_defines.h \
+  /usr/include/g++/cstring /usr/include/g++/cstddef /usr/include/stddef.h \
+  /usr/include/g++/climits /usr/include/g++/cstdlib /usr/include/g++/new \
+  /usr/include/g++/exception /usr/include/g++/iosfwd \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/c++locale.h \
+  /usr/include/g++/clocale /usr/include/locale.h /usr/include/g++/cstdio \
+  /usr/include/g++/cctype /usr/include/g++/bits/stringfwd.h \
+  /usr/include/g++/bits/fpos.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/c++io.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/gthr.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/gthr-single.h \
+  /usr/include/g++/cwchar /usr/include/g++/ctime /usr/include/wchar.h \
+  /usr/include/g++/bits/stl_pair.h /usr/include/g++/bits/type_traits.h \
+  /usr/include/g++/bits/stl_iterator_base_types.h \
+  /usr/include/g++/bits/stl_iterator_base_funcs.h \
+  /usr/include/g++/bits/concept_check.h \
+  /usr/include/g++/bits/stl_iterator.h /usr/include/g++/bits/stl_alloc.h \
+  /usr/include/g++/bits/stl_threads.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/atomicity.h \
+  /usr/include/g++/bits/stl_construct.h \
+  /usr/include/g++/bits/stl_uninitialized.h \
+  /usr/include/g++/bits/stl_list.h /usr/include/g++/bits/list.tcc \
+  /usr/include/strings.h ../lib/mempool.h ../lib/rfc1035.h ../lib/reply.h \
+  ../lib/resolver.h decl.h thread_queue.h thread_manager.h \
+  resolver_thread.h /usr/include/math.h shotgund.h shotgund_signal.h \
+  shotgund_config.h /usr/include/getopt.h
+
+shotgund_resolver.h:
+
+log.h:
+
+shotgund_sys.h:
+
+/usr/include/unistd.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/machine/cdefs.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/machine/endian.h:
+
+/usr/include/sys/endian.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/sys/time.h:
+
+/usr/include/time.h:
+
+/usr/include/sys/unistd.h:
+
+../lib/config.h:
+
+/usr/include/sys/param.h:
+
+/usr/include/sys/simplelock.h:
+
+/usr/include/sys/syslimits.h:
+
+/usr/include/sys/signal.h:
+
+/usr/include/machine/signal.h:
+
+/usr/include/machine/trap.h:
+
+/usr/include/sys/siginfo.h:
+
+/usr/include/sys/limits.h:
+
+/usr/include/machine/internal_types.h:
+
+/usr/include/machine/limits.h:
+
+/usr/include/machine/param.h:
+
+/usr/include/sys/file.h:
+
+/usr/include/sys/fcntl.h:
+
+/usr/include/sys/mman.h:
+
+/usr/include/sys/stat.h:
+
+/usr/include/sys/wait.h:
+
+/usr/include/sys/ioctl.h:
+
+/usr/include/sys/ttycom.h:
+
+/usr/include/sys/ioccom.h:
+
+/usr/include/sys/dkio.h:
+
+/usr/include/sys/filio.h:
+
+/usr/include/sys/sockio.h:
+
+/usr/include/sys/resource.h:
+
+/usr/include/sys/uio.h:
+
+/usr/include/sys/poll.h:
+
+/usr/include/ctype.h:
+
+/usr/include/sys/sysctl.h:
+
+/usr/include/sys/ucred.h:
+
+/usr/include/sys/proc.h:
+
+/usr/include/machine/proc.h:
+
+/usr/include/sys/selinfo.h:
+
+/usr/include/sys/event.h:
+
+/usr/include/sys/queue.h:
+
+/usr/include/sys/timeout.h:
+
+/usr/include/machine/atomic.h:
+
+/usr/include/sys/resourcevar.h:
+
+/usr/include/uvm/uvm_extern.h:
+
+/usr/include/sys/vmmeter.h:
+
+/usr/include/sys/tree.h:
+
+/usr/include/uvm/uvm_param.h:
+
+/usr/include/machine/vmparam.h:
+
+/usr/include/sys/lock.h:
+
+/usr/include/uvm/uvm_page.h:
+
+/usr/include/uvm/uvm_pglist.h:
+
+/usr/include/uvm/uvm_pmap.h:
+
+/usr/include/machine/pmap.h:
+
+/usr/include/machine/cpufunc.h:
+
+/usr/include/machine/pte.h:
+
+/usr/include/machine/segments.h:
+
+/usr/include/uvm/uvm_object.h:
+
+/usr/include/uvm/uvm_map.h:
+
+/usr/include/uvm/uvm_anon.h:
+
+/usr/include/uvm/uvm_fault.h:
+
+/usr/include/uvm/uvm_pager.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/grp.h:
+
+/usr/include/pwd.h:
+
+/usr/include/syslog.h:
+
+/usr/include/dirent.h:
+
+/usr/include/sys/dirent.h:
+
+/usr/include/pthread.h:
+
+/usr/include/limits.h:
+
+/usr/include/sched.h:
+
+/usr/include/string.h:
+
+/usr/include/stdio.h:
+
+/usr/include/stdarg.h:
+
+/usr/include/signal.h:
+
+/usr/include/errno.h:
+
+/usr/include/sys/errno.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/fcntl.h:
+
+/usr/include/fnmatch.h:
+
+/usr/include/utime.h:
+
+/usr/include/netdb.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/netinet/in_systm.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/netinet6/in6.h:
+
+/usr/include/netinet/ip.h:
+
+/usr/include/netinet/ip_icmp.h:
+
+/usr/include/net/ppp_defs.h:
+
+/usr/include/net/if.h:
+
+/usr/include/altq/if_altq.h:
+
+/usr/include/net/if_arp.h:
+
+/usr/include/net/if_ppp.h:
+
+/usr/include/regex.h:
+
+../lib/dotconf++/dotconfpp.h:
+
+/usr/include/g++/list:
+
+/usr/include/g++/bits/functexcept.h:
+
+/usr/include/g++/exception_defines.h:
+
+/usr/include/g++/bits/stl_algobase.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/c++config.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/os_defines.h:
+
+/usr/include/g++/cstring:
+
+/usr/include/g++/cstddef:
+
+/usr/include/stddef.h:
+
+/usr/include/g++/climits:
+
+/usr/include/g++/cstdlib:
+
+/usr/include/g++/new:
+
+/usr/include/g++/exception:
+
+/usr/include/g++/iosfwd:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/c++locale.h:
+
+/usr/include/g++/clocale:
+
+/usr/include/locale.h:
+
+/usr/include/g++/cstdio:
+
+/usr/include/g++/cctype:
+
+/usr/include/g++/bits/stringfwd.h:
+
+/usr/include/g++/bits/fpos.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/c++io.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/gthr.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/gthr-single.h:
+
+/usr/include/g++/cwchar:
+
+/usr/include/g++/ctime:
+
+/usr/include/wchar.h:
+
+/usr/include/g++/bits/stl_pair.h:
+
+/usr/include/g++/bits/type_traits.h:
+
+/usr/include/g++/bits/stl_iterator_base_types.h:
+
+/usr/include/g++/bits/stl_iterator_base_funcs.h:
+
+/usr/include/g++/bits/concept_check.h:
+
+/usr/include/g++/bits/stl_iterator.h:
+
+/usr/include/g++/bits/stl_alloc.h:
+
+/usr/include/g++/bits/stl_threads.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/atomicity.h:
+
+/usr/include/g++/bits/stl_construct.h:
+
+/usr/include/g++/bits/stl_uninitialized.h:
+
+/usr/include/g++/bits/stl_list.h:
+
+/usr/include/g++/bits/list.tcc:
+
+/usr/include/strings.h:
+
+../lib/mempool.h:
+
+../lib/rfc1035.h:
+
+../lib/reply.h:
+
+../lib/resolver.h:
+
+decl.h:
+
+thread_queue.h:
+
+thread_manager.h:
+
+resolver_thread.h:
+
+/usr/include/math.h:
+
+shotgund.h:
+
+shotgund_signal.h:
+
+shotgund_config.h:
+
+/usr/include/getopt.h:

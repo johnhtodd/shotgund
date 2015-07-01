@@ -1,0 +1,173 @@
+dotconfpp.o dotconfpp.o: dotconfpp.cc dotconfpp.h /usr/include/g++/list \
+  /usr/include/g++/bits/functexcept.h \
+  /usr/include/g++/exception_defines.h \
+  /usr/include/g++/bits/stl_algobase.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/c++config.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/os_defines.h \
+  /usr/include/g++/cstring /usr/include/g++/cstddef /usr/include/stddef.h \
+  /usr/include/sys/cdefs.h /usr/include/machine/cdefs.h \
+  /usr/include/sys/_types.h /usr/include/machine/_types.h \
+  /usr/include/string.h /usr/include/g++/climits /usr/include/limits.h \
+  /usr/include/sys/limits.h /usr/include/machine/internal_types.h \
+  /usr/include/machine/limits.h /usr/include/sys/syslimits.h \
+  /usr/include/g++/cstdlib /usr/include/stdlib.h /usr/include/sys/types.h \
+  /usr/include/machine/endian.h /usr/include/sys/endian.h \
+  /usr/include/sys/select.h /usr/include/sys/time.h /usr/include/time.h \
+  /usr/include/g++/new /usr/include/g++/exception /usr/include/g++/iosfwd \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/c++locale.h \
+  /usr/include/g++/clocale /usr/include/locale.h /usr/include/g++/cstdio \
+  /usr/include/stdio.h /usr/include/g++/cctype /usr/include/ctype.h \
+  /usr/include/g++/bits/stringfwd.h /usr/include/g++/bits/fpos.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/c++io.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/gthr.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/gthr-single.h \
+  /usr/include/g++/cwchar /usr/include/g++/ctime /usr/include/wchar.h \
+  /usr/include/g++/bits/stl_pair.h /usr/include/g++/bits/type_traits.h \
+  /usr/include/g++/bits/stl_iterator_base_types.h \
+  /usr/include/g++/bits/stl_iterator_base_funcs.h \
+  /usr/include/g++/bits/concept_check.h \
+  /usr/include/g++/bits/stl_iterator.h /usr/include/g++/bits/stl_alloc.h \
+  /usr/include/g++/bits/stl_threads.h \
+  /usr/include/g++/i386-unknown-openbsd4.1/bits/atomicity.h \
+  /usr/include/g++/bits/stl_construct.h \
+  /usr/include/g++/bits/stl_uninitialized.h \
+  /usr/include/g++/bits/stl_list.h /usr/include/g++/bits/list.tcc \
+  /usr/include/stdarg.h /usr/include/strings.h /usr/include/errno.h \
+  /usr/include/sys/errno.h /usr/include/sys/stat.h /usr/include/unistd.h \
+  /usr/include/sys/unistd.h ../../lib/mempool.h
+
+dotconfpp.h:
+
+/usr/include/g++/list:
+
+/usr/include/g++/bits/functexcept.h:
+
+/usr/include/g++/exception_defines.h:
+
+/usr/include/g++/bits/stl_algobase.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/c++config.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/os_defines.h:
+
+/usr/include/g++/cstring:
+
+/usr/include/g++/cstddef:
+
+/usr/include/stddef.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/machine/cdefs.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/string.h:
+
+/usr/include/g++/climits:
+
+/usr/include/limits.h:
+
+/usr/include/sys/limits.h:
+
+/usr/include/machine/internal_types.h:
+
+/usr/include/machine/limits.h:
+
+/usr/include/sys/syslimits.h:
+
+/usr/include/g++/cstdlib:
+
+/usr/include/stdlib.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/machine/endian.h:
+
+/usr/include/sys/endian.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/sys/time.h:
+
+/usr/include/time.h:
+
+/usr/include/g++/new:
+
+/usr/include/g++/exception:
+
+/usr/include/g++/iosfwd:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/c++locale.h:
+
+/usr/include/g++/clocale:
+
+/usr/include/locale.h:
+
+/usr/include/g++/cstdio:
+
+/usr/include/stdio.h:
+
+/usr/include/g++/cctype:
+
+/usr/include/ctype.h:
+
+/usr/include/g++/bits/stringfwd.h:
+
+/usr/include/g++/bits/fpos.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/c++io.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/gthr.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/gthr-single.h:
+
+/usr/include/g++/cwchar:
+
+/usr/include/g++/ctime:
+
+/usr/include/wchar.h:
+
+/usr/include/g++/bits/stl_pair.h:
+
+/usr/include/g++/bits/type_traits.h:
+
+/usr/include/g++/bits/stl_iterator_base_types.h:
+
+/usr/include/g++/bits/stl_iterator_base_funcs.h:
+
+/usr/include/g++/bits/concept_check.h:
+
+/usr/include/g++/bits/stl_iterator.h:
+
+/usr/include/g++/bits/stl_alloc.h:
+
+/usr/include/g++/bits/stl_threads.h:
+
+/usr/include/g++/i386-unknown-openbsd4.1/bits/atomicity.h:
+
+/usr/include/g++/bits/stl_construct.h:
+
+/usr/include/g++/bits/stl_uninitialized.h:
+
+/usr/include/g++/bits/stl_list.h:
+
+/usr/include/g++/bits/list.tcc:
+
+/usr/include/stdarg.h:
+
+/usr/include/strings.h:
+
+/usr/include/errno.h:
+
+/usr/include/sys/errno.h:
+
+/usr/include/sys/stat.h:
+
+/usr/include/unistd.h:
+
+/usr/include/sys/unistd.h:
+
+../../lib/mempool.h:

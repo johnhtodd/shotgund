@@ -1,0 +1,400 @@
+#
+# shotgund - an asynchronous, parallel, domain-swapping DNS daemon
+#
+# example config file v1.1.8
+#  2010-08-13
+#
+# (c) 2010 
+#
+#  Specifications by John Todd <jtodd@tellocorp.com>
+#  Program by Kryvoshey Oleksiy <oleksiy@kharkiv.com.ua>
+#
+
+#
+# You can include other configuration files into this file by use of the
+#  "include" modifier.  Environment variables such as ${PWD} are supported.
+# This is for easy additions by scripts without fearing overwrite of the
+#  whole file if a mistake is made.  Included files are treated as if
+#  they were appended to the end of the main configuration file.
+#
+# include /tmp/something/morestuff.conf
+
+
+#
+# Run with debug level 1 as default.  This value can be overridden by
+#  the command line.  Debug levels are 1-4, with 4 being the most 
+#  verbose.
+#
+# Syntax:
+#   debug <1-4>
+#
+# debug 4
+
+#
+# Fast (async poll() ) or slow (many small poll() ) queries.
+#
+# With fast queries, only log at the end of a group.  With slow queries,
+#  timestamp logging is given per thread (per resolver) and may be more
+#  informative.  If you are running this in production, it is recommended
+#  that you run in async mode. Default is to use fast poll() (async_query
+#  on)
+#
+# Syntax:
+#   async_query [on|off]
+#
+async_query on
+
+#
+# debug_file specifies the file to write out the debug information.
+#  This value can be overridden by the command line.  If run in the
+#  foreground, debug data will be appended to both stdout and this file.
+#  No default.
+#
+# Syntax:
+#   debug_file <filename>
+#
+debug_file /tmp/shotgund_log
+
+#
+# pid_file specifies the file to write daemon process id.  No default.
+#
+# Syntax: 
+#   pid_file <filename>
+#
+pid_file /var/run/shotgund.pid
+
+#
+# Syslog output.  If specified, will copy output to syslog with this
+#  message flag.  Default is to not send syslog messages.
+#
+# Syntax:
+#   syslog_level <syslog_message_name>
+#
+# syslog_level local1.debug
+
+#
+# What user should the daemon run as after launch?  This user takes over
+#  after all root-level activity (socket creation, etc) has been completed.
+#  Typically, this is "named", but there is no default, so "root" is left
+#  in place for those of you who don't read this file.
+#
+# Syntax:
+#  user <username>
+#
+user root
+
+#
+# The "listen" specifier will allow shotgund to listen on multiple
+#  IP addresses and ports.  The "*" can be a wildcard for all interfaces
+#  that are bound to the system.  You may want to run shotgund for local
+#  resolution on a different port, and then loop it to "bind" or some other
+#  resovler running on port 53.  The default config is to run on port 53
+#  so watch out for conflicts from other daemons.  Specify multiple "listen"
+#  lines to bind to multiple local IP addresses and/or ports.
+#
+# Syntax:
+#  listen <address> [port]
+#
+listen * 53
+
+#
+# hosts
+#
+# The "host" lines are basically ACLs and rules.  They describe which
+#  domains and/or pointer types we want to rip apart and handle in specific
+#  ways. It first looks at the IP address of the device that is sending the
+#  query.  If it matches one or more lines, then see if it matches the
+#  top-level zone that is being requested.  Then it checks to see what type
+#  of DNS query is being done.  If for all values there is a match, and a
+#  "permit" keyword is specified, then strip off the zone from the query,
+#  and hand off to the zones or nameservers specified in the list after the
+#  "permit" keyword, in the order the zones/nameservers are listed.
+#
+# If a zone is specified, then execute the domain-suffix remapping of that
+#  zone's rulsets and do queries based on the nameservers specified by that
+#  zone's configuration (see "zones" below.)
+#
+# Rules are interpreted in order of entry, and the first match ends the
+#  lookup process.
+#
+#
+# Syntax:
+#   host <ip_address> <zone_suffix> <record_type> <permit<zone|forwarder [zone|forwarder [...]]>|deny> [options]
+#
+#
+# ip_address = dotted decimal IP address.  Wildcards of "*" may be used to
+#   specify entire octets (i.e.: 1.2.3.*) No netmask or regexp is supported
+#   yet.  No default for this argument.
+#
+# zone_suffix = the domain of queries transmitted to shotgund which trigger
+#   a transmutation/parallelization of lookups.  Typically, this would be a
+#   suffix such as "e164.arpa", so queries like:
+#      0.0.0.6.8.3.5.3.0.3.1.e164.arpa.
+#   would get the "e164.arpa" portion stripped off and replaced with various
+#   suffixes in alternate ENUM trees as specified in the "zone" statements
+#   below.  A wildcard of "*" will match all zone suffixes (careful with
+#   this!) No default for this argument.
+# 
+# record_type = any valid record request type, such as NAPTR, A, CNAME, SRV,
+#   etc. 
+#   * = all record types (wildcard).  No default for this argument.
+#
+# permit|deny = allow or deny the lookup.  A "permit" line is followed by
+#   one or more zone group names OR forwarder group names, separated by
+#   spaces.  This allows specification of several re-write rules (in
+#   sequential order) and then optionally a set of "default" resolvers if
+#   there are no matches in the zone re-write sections.  A zone group entry
+#   will result in re-writing the suffix of the domain (see below) while a
+#   forwarder group entry will just send the query off to that forwarding
+#   group with the domain suffix unchanged.  Typically, forwarding group
+#   entries are made after zone group entries as the implication is that
+#   there were no valid replies from the re-writes, so just pass the query
+#   out to a set of stanard forwarding resolvers without re-writing. A
+#   "deny" entry will cause the lookup path to stop, and there is no answer
+#   given to the remote host.  No zone or forwarder group names are used for
+#   "deny" lines No default for this argument.
+#
+# Options: 
+#
+#       n = no re-write of full record on return (instead of re-writing full
+#              response to the "re-written" domain, just hand back the
+#              matched record with the "replacement" domain name intact -
+#              this may not work for some applications; be wary of this
+#              option.)
+#
+#   i      = ISN re-write (6.5.2.*.3.0.2.2.bar.com becomes 3.0.2.2.256.foo.com)
+#              For more details on ISNs, see README2.TXT
+#
+# Note: Since "Options" are alphanumeric, and it is possible to have
+#  alphanumeric group names, the group names of "n", "i", and (for
+#  historical reasons) "j" are reserved and MUST appear as the last
+#  space-separated characters in the line if they are used.
+#
+#  
+# In this example, we want to look for all queries originated by processes
+#  on the local loopback address (this server) that are for pointer type
+#  NAPTR, and that have a domain suffix of "e164.arpa".  Then, we want to
+#  re-write the query according to the commands specified further down in
+#  zone "rewrite1" first, then if there are no valid replies we try the
+#  re-write rules in zone "rewrite2", and then if there are still no valid
+#  replies, we try handing it off to the default resolvers, one first, then
+#  the other. Note that forwarder groups "default-nameserver[1,2]" don't do
+#  any domain re-writing if the query gets to that point. (see below) For
+#  all zones/forwarders, perform an ISN style ("i") lookup re-write - this
+#  won't hurt performance or cause any strange results, since ISN re-writes
+#  only happen when there is an "*" in the NAPTR queries, which should
+#  rarely (never?) happen unintentionally.
+#
+# If we see any queries from 127.0.0.1 with any domain suffix other than
+#   e.164.arpa and OTHER than RR type NAPTR, then just hand the query off
+#   sequentially to the default nameservers specified in forwarder-groups
+#   "default-nameserver[1,2]"
+#
+host 127.0.0.1 e164.arpa NAPTR permit rewrite1 rewrite2 default-nameserver1 default-nameserver2 i
+host 127.0.0.1 *         *     permit default-nameserver1 default-nameserver2
+#
+#
+# We want to perform the same lookups as above on any DNS query coming from
+#  anything in the Class A of 10.0.0.0/8, with the same re-write group
+#  cascade list.  All non-NAPTR queries from any other domain name suffix go
+#  straight to default resolvers.
+#
+host 10.*.*.*  e164.arpa NAPTR permit rewrite1 rewrite2 default-nameserver1 default-nameserver2 i
+host 10.*.*.*  *         *     permit default-nameserver1 default-nameserver2
+
+
+#
+# forwarder-groups
+#
+# Forwarder-groups describe a set of nameservers to use for specific
+#  lookups. Once specified, a forwarder group can be used in several places:
+#  in the "zone" lines and in the "host" lines.  If multiple resolvers are
+#  specified in a forwarder group, then all forwarders are queried in
+#  parallel.
+#
+# You probably want to have the aggregate time of a query (through all
+#  "forwarder" lines) for wildcard lookups to be greater than 10 seconds,
+#  since that is the commonly used timeout for DNS client libraries.  If
+#  your last "forwarder" line is called before that timeout, then you may
+#  receive "NXDOMAIN" errors inappropriately.  However, in some
+#  circumstances this early NXDOMAIN reply may be desired (i.e.: NAPTR) so
+#  think about the intended result while setting your timers.
+#
+# Recall that shotgund is assumed to pass >99% of it's traffic without
+#  modification, so the wildcard queries see a lot of activity if you have
+#  "normal" machines resolving against shotgund as well as your
+#  ENUM/NAPTR/VoIP client systems.  It is a good idea to have a very long
+#  timeout on these resolvers, since these are the "last ditch" resolvers,
+#  and should wait for normal DNS resolution timers across the entire DNS
+#  tree (assumed to be public).
+#
+# Syntax:
+#   forwarder [groupname] [ip_address] [port] [waitms]
+#
+#   groupname  = alphanumeric name (no spaces) to assign to this list of
+#                 resolvers
+#
+#   ip_address = IP address of forwarding resolver
+#
+#   port       = numeric port number of DNS resolver on remote host 
+#                 (optional - default is 53)  If waitms is specified, then
+#                 port number is required.
+#
+#   waitms     = numeric value for millisecond of wait for response
+#                 from this host.  Optional.  If there is a conflict
+#                 where there is both a waitms on the "forwarder" 
+#                 and the "zone", then the zone waitms value will be
+#                 used.  Optional.  No default value.  
+#
+#
+# In this example, we two resolvers which are used for "normal" DNS
+#  resolution in a non-parallel fashion.  This emulates regular DNS resolver
+#  behavior, and is non-abusive to the DNS tree.  We specify
+#  "default-nameserver1" and then "default-nameserver2" in several places in
+#  series to emulate the same delays and functionality of having multiple
+#  entries in /etc/resolv.conf on the querying client.  The sum of these two
+#  resolvers is 10.2 seconds before it fails out, which is probably more
+#  than the client is willing to wait, but that's probably OK since delays
+#  of longer than 10 seconds are symptomatic of some other downstream DNS
+#  problem that you'd see anyway.  It is wise and polite to have your
+#  non-NAPTR queries happen in sequential order, and not parallel, so even
+#  though these might be the same nameservers you use in other queries they
+#  should be separated out for sequential use for non-NAPTR lookups.
+#
+forwarder default-nameserver1 216.239.38.10  53 3000
+forwarder default-nameserver2 217.20.160.161 53 7200
+#
+# In this example, the forwarder group "internal-resolvers" is for a set of
+#  internal ENUM zones which have their own resolvers.  These two
+#  nameservers are authoritative for certain ENUM-like zones which are
+#  private, and can only be reached on these two resolvers.  It is possible
+#  to have each separate domain suffix lookup use a different set of
+#  resolvers.  No waitms values are given here, becuase the waitms is
+#  specified on the "zone" lines.
+#
+forwarder internal-resolvers 10.10.10.4 53
+forwarder internal-resolvers 10.10.22.9 53
+#
+# Here we specify the two nameservers we're going to use for parallel
+#  nameservice queries on public-DNS ENUM-like trees.  These are actually
+#  the same two nameservers as we have in the "default-nameserverX"
+#  listings, but here we're creating a single group with both specified, so
+#  that any reference to the group "public-resolvers" will create two
+#  queries for each domain suffix (see zone below "rewrite2") in parallel.
+#
+forwarder public-resolvers 216.239.38.10  53
+forwarder public-resolvers 217.20.160.161 53
+
+
+#
+# zones
+#
+# So here is where we fork the queries for a particular group. The daemon
+#  cuts off the suffix of the original query (that suffix is indicated in
+#  the "host" line, above) and then tacks on the suffix in the "zone" lines
+#  below.  If an answer comes back from one of the lookups, then the NAPTR
+#  is given back to the querying host.
+#
+#
+# Syntax:
+#   zone <group> <zone> <weight> <waitms> <forwarder-group>
+#
+#  group  = alphanumeric identifier of group name to be used 
+#
+#  zone   = zone suffix to use which will replace the zone suffix specified
+#            on the "host" line for matching.  If you specify "e164.arpa" on
+#            your host line, and you specify "foo.com" in the zone keyword,
+#            then the query will go out as "1.2.3.4.foo.com"
+# 
+#  weight = numeric weight for reply preferences.  If you give each zone
+#             line the same weight, then the first reply (or last timer to
+#             expire) will cause a reply to be given to the querying host
+#             (or the next zone specified in the host line to be tried.) If
+#             you give one zone a lower number, then shotgund will wait for
+#             a reply for that zone even if other zone lines receive a reply
+#             until a valid answer OR the timer runs out on that zone line.
+#             In the case of more than 2 weights, the next lowest weight
+#             will take precedence and continue in that fashion.  Lower
+#             numbers = higher preference, like MX records.  Numbers do not
+#             need to be in atomically incrementing order.
+#
+#  waitms  = The number of milliseconds to wait for replies for this zone. 
+#             After the timer expires, any late replies for that zone are
+#             ignored.
+#
+#  forwarder-group = The alphanumeric name which identifies the forwarding
+#             resolvers which should be used for this zone. This may
+#             represent several forwarders in parallel (see the "forwarders"
+#             keyword, below) Typically, this identifier is the same as the
+#             zone name for clarity, but can be any string.
+#
+#
+# zone group "rewrite1" (example)
+#
+# Zones have a group name that is specified on the "host" lines above, so
+#  all lookups for a certain "zone" line will be performed on one or more
+#  forwarder-groups specified on each line.  If there are multiple
+#  forwarders associated with a forwarder-group, then the lookup will be
+#  performed asynchronously and in parallel across all forwarding resolvers
+#  specified in the forwarder-group list. In this example, there are four
+#  queries since there are two zones in zone-group "rewrite1", and there are
+#  two entries in forwarder-group "internal-resolvers", that means there are
+#  four DNS queries created from any query that goes through this
+#  zone-group.
+#
+# This queries performed in this zone-group will last a maximum of 70ms,
+#  which is the longest time specified to wait according to the line for
+#  "e164.myothercompany.com".  If there are two NXDOMAIN responses then this
+#  zone-group will exit and the next step will be taken according to the
+#  "host" line.  If there is a valid reply from either zone lookup, then the
+#  reply will be given back to the querying host immediately, as both
+#  zone-group lines have the same weight ("1").  If we only wanted to take
+#  the answer from one of the nameservers which we thought was more
+#  important, then we'd give that a lower weight and the lookup delay would
+#  exit immediately upon receiving a response from the lowest-weight reply,
+#  or if there were mutliple replies before the lowest had responded then
+#  the answer from the resolver group with the lowest weight would be
+#  returned.
+#
+# The zone-group "rewrite1" has a very short timeout for the replies because
+#  these should be on the local network on machines that are
+#  fast-responding.  Since these two queries have equal weights, it really
+#  doesn't make sense to have them with different timeouts since the longest
+#  timeout dictates the delay, but different times are shown for
+#  illustration.
+#
+zone rewrite1 e164.mycompany.com       1 50   internal-resolvers
+zone rewrite1 e164.myothercompany.com  1 70   internal-resolvers
+#
+#
+#
+# zone group "rewrite2" (example)
+#
+# This zone-group is for domain suffixes which are on the "public"
+#  namespace, and so they have correspondingly longer timeouts.  Queries
+#  which make it to this zone-group will create a lot more traffic, since
+#  all of these zones are being executed in parallel.  Since there are two
+#  resolvers specified in forwarder-group "public-resolvers", that means
+#  there are 8 queries generated by this set of zone lines.
+# There is a weight ordering for these zones, as well.  If the 400ms timer
+#  has not expired on queries for e164.arpa, then even if a valid response
+#  is received by another lookup there will be no answer to the client. 
+#  Only after all timers have expired for lower-weight queries will there be
+#  a valid reply or NXDOMAIN passed to the querying client.  If a valid
+#  reply is received, then all higher-weight query responses and timers will
+#  be immediately discarded.
+#
+# Note that we're adding "e164.arpa" back into the list, even though that's
+#  the original domain suffix we matched in the "host" line.  It's typically
+#  a good idea to include the original domain suffix in the search tree
+#  _somewhere_.
+#
+zone rewrite2 e164.arpa   1 400 public-resolvers
+zone rewrite2 freenum.org 2 400 public-resolvers
+zone rewrite2 e164.info   2 270 public-resolvers
+zone rewrite2 e164.org    3 200 public-resolvers
+#
+#
+# 
+# END OF BASIC CONFIG FILE
+#
