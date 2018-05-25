@@ -49,9 +49,13 @@
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <netinet/ip_icmp.h>
-#include <net/ppp_defs.h>
+#ifdef HAVE_NET_PPP_DEFS_H
+    #include <net/ppp_defs.h>
+#endif
 #include <net/if.h>
-#include <net/if_ppp.h>
+#ifdef HAVE_IF_PPP_H
+    #include <net/if_ppp.h>
+#endif
 
 #include <regex.h>
 

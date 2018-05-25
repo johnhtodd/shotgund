@@ -1,7 +1,6 @@
 MLIBS = ../lib/libasyncresolv.a ../lib/dotconf++/libdotconfpp.a
 
-INCLUDES = -I../lib -I../lib/dotconf++
-AM_CPPFLAGS = -D_REENTRANT -fno-exceptions -fomit-frame-pointer -fexpensive-optimizations -pipe -Werror -Wall -Wno-unused -Wno-uninitialized
+AM_CPPFLAGS = -I../lib -I../lib/dotconf++ -D_REENTRANT -fno-exceptions -fomit-frame-pointer -pipe -Wall -Wno-unused -Wno-uninitialized
 
 sbin_PROGRAMS=shotgund
 

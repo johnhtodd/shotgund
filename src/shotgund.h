@@ -11,7 +11,7 @@
 class Shotgund
 {
 public:
-    typedef ThreadManager<ThreadQueue<QueueObj*>,ResolverThread> ThreadManager;
+    typedef ::ThreadManager<ThreadQueue<QueueObj*>,ResolverThread> ThreadManager;
 
 private:
     Log * log;
