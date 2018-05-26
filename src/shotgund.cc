@@ -12,9 +12,9 @@ const Shotgund * __server = NULL;
 void print_version()
 {
 #ifdef CRIPPLED
-    printf("shotgund "PACKAGE_VERSION"-c - an asynchronous, parallel, domain-swapping shim DNS daemon\n");
+    printf("shotgund " PACKAGE_VERSION "-c - an asynchronous, parallel, domain-swapping shim DNS daemon\n");
 #else
-    printf("shotgund "PACKAGE_VERSION" - an asynchronous, parallel, domain-swapping shim DNS daemon\n");
+    printf("shotgund " PACKAGE_VERSION " - an asynchronous, parallel, domain-swapping shim DNS daemon\n");
 #endif
 }
 
@@ -431,7 +431,7 @@ int Shotgund::start()
                     if(responseLen == -1){
                         log->log(1,0,0, "recvfrom failed: %s", strerror(errno));
                     }
-                    if(inet_ntop(RFC1035_AF_INET, &(obj->in).RFC1035_sin_addr, obj->addr, RFC1035_INET_ADDRSTRLEN) == NULL){
+                    if(inet_ntop(RFC1035_AF_INET, &(obj->in).sin_addr, obj->addr, RFC1035_INET_ADDRSTRLEN) == NULL){
                         obj->addr[0] = 0;
                     }
                     obj->msgLen = responseLen;

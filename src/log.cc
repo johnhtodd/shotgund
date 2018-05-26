@@ -47,11 +47,11 @@ int Log::vlog(int query_id, int query_subid, const char * msg, va_list ap)const
     gettimeofday(&tv, NULL);
 
     if(query_id != 0 && query_subid != 0){
-        f+=snprintf(str+f, len-f, ".%.3ld [%.6d.%.3d] %s\n", tv.tv_usec/1000, query_id, query_subid, msg);
+        f+=snprintf(str+f, len-f, ".%.3ld [%.6d.%.3d] %s\n", (long int)tv.tv_usec/1000, query_id, query_subid, msg);
     } else if(query_subid == 0 && query_id != 0){
-        f+=snprintf(str+f, len-f, ".%.3ld [%.6d] %s\n", tv.tv_usec/1000, query_id, msg);
+        f+=snprintf(str+f, len-f, ".%.3ld [%.6d] %s\n", (long int)tv.tv_usec/1000, query_id, msg);
     } else {
-        f+=snprintf(str+f, len-f, ".%.3ld %s\n", tv.tv_usec/1000, msg);
+        f+=snprintf(str+f, len-f, ".%.3ld %s\n", (long int)tv.tv_usec/1000, msg);
     }
     str[f] = 0;
 

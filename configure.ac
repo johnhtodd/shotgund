@@ -1,14 +1,10 @@
-#                                               -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
+AC_PREREQ([2.56])
+AC_INIT([shotgund], [1.1.8], [oleksiy@kharkiv.com.ua])
 
-AC_PREREQ(2.56)
-AC_INIT(shotgund, 1.1.7, oleksiy@kharkiv.com.ua)
 AC_CONFIG_SRCDIR([lib])
 AC_CONFIG_HEADER([lib/config.h])
 
 AC_PROG_LIBTOOL
-
-AM_INIT_AUTOMAKE(shotgund, 1.1.7, oleksiy@kharkiv.com.ua)
 
 # Checks for programs.
 AC_PROG_CXX
@@ -25,7 +21,7 @@ AC_CHECK_LIB([pthread], [pthread_create])
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([arpa/inet.h fcntl.h malloc.h netinet/in.h stdlib.h string.h sys/socket.h sys/time.h unistd.h])
+AC_CHECK_HEADERS([arpa/inet.h fcntl.h malloc.h netinet/in.h stdlib.h string.h sys/socket.h sys/time.h unistd.h net/ppp_defs.h net/if_ppp.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
@@ -46,7 +42,7 @@ AC_ARG_ENABLE(crippled,
 [  --enable-crippled     Compile 'crippled' version of shotgund.], [
     CRIPPLED=$enableval
 ],[
-  CRIPPLED=no
+   CRIPPLED=no
 ])
 AC_MSG_RESULT([$CRIPPLED])
 
@@ -59,7 +55,8 @@ dnl Check for IPv6 support
 
 AC_MSG_CHECKING([for IPv6 support])
 
-AC_RUN_IFELSE(
+AC_ARG_ENABLE(ipv6, [ --enable-ipv6 enables ipv6 support],
+[AC_RUN_IFELSE(
     AC_LANG_SOURCE([
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -77,7 +74,7 @@ int main() {
     AC_DEFINE([HAVE_IPV6], [1], [is IPv6 support enabled]),
     AC_MSG_RESULT(no),
     AC_MSG_RESULT(cross_compiling)
-)
+)],[AC_MSG_RESULT(no)])
 
 # Compiler features options
 CXXFLAGS="${CXXFLAGS} -fno-exceptions"
@@ -98,4 +95,9 @@ AC_CONFIG_FILES([Makefile
                  lib/Makefile
                  lib/dotconf++/Makefile
                  src/Makefile])
+
+AM_INIT_AUTOMAKE([subdir-objects])
+
+AM_PROG_AR
+
 AC_OUTPUT

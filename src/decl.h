@@ -19,7 +19,11 @@ struct QueueObj {
     int msgLen;
     u_int16_t id;
     char addr[RFC1035_INET_ADDRSTRLEN];
+#ifdef HAVE_IPV6
+    sockaddr_in6 in;
+#else
     sockaddr_in in;
+#endif
     int fd;
 };
 
